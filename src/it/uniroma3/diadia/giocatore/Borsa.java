@@ -76,8 +76,7 @@ public class Borsa {
 		
 		Attrezzo rimosso = null;
 		
-			if( isEmpty() == true) {
-				System.out.println("non ci stanno oggetti");	
+			if( isEmpty() == true) {	
 				return null;
 			} 
 				
@@ -93,14 +92,9 @@ public class Borsa {
 		            // Pulisci l'ultima posizione e decrementa il contatore
 		            attrezzi[numeroAttrezzi - 1] = null;
 		            numeroAttrezzi--;
-		            
-		            System.out.println("Attrezzo " + wanted + " rimosso con successo!");
 		            return rimosso;
 		        }
 		    }
-				
-		
-				System.out.println("Attrezzo " + rimosso + " non trovato!");
 		return rimosso;
 	}
 

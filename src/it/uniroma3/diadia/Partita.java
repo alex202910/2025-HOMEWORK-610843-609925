@@ -72,14 +72,6 @@ public class Partita {
         this.finita = true;
     }
 
-   /* public int getCfu() {
-        return this.cfu;
-    }
-
-    public void setCfu(int cfu) {
-        this.cfu = cfu;
-    }
-    */
     public String toString() {
     	return this.getStanzaCorrente()	+ "\nCFU = " + this.getGiocatore().getCfu();
     }

@@ -47,12 +47,11 @@ public class DiaDia {
 	
 	public void gioca() {
 		String istruzione; 
-		Scanner scannerDiLinee;
 
 		this.IO.mostraMessaggio(MESSAGGIO_BENVENUTO);
-		scannerDiLinee = new Scanner(IO.leggiRiga());		
+
 		do		
-			istruzione = scannerDiLinee.nextLine(); //
+			istruzione = IO.leggiRiga(); //
 		while (!processaIstruzione(istruzione));
 		
 	}   
@@ -99,9 +98,10 @@ public class DiaDia {
 	 * Stampa informazioni di aiuto.
 	 */
 	private void aiuto() {
+		String niente = "";
 		for(int i=0; i< elencoComandi.length; i++) 
-			IO.mostraMessaggio(elencoComandi[i]+" ");
-		IO.mostraMessaggio("\n");
+			niente += (elencoComandi[i] + " ");
+		this.IO.mostraMessaggio(niente);
 	}
 
 	/**
@@ -142,13 +142,13 @@ public class DiaDia {
 				Attrezzo AttrezzoDaEliminare = this.partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
 				if(this.partita.getGiocatore().getBorsa().addAttrezzo(AttrezzoDaEliminare)) {
 					this.partita.getStanzaCorrente().removeAttrezzo(AttrezzoDaEliminare);
-					IO.mostraMessaggio("l'oggetto è stato preso");
+					IO.mostraMessaggio("l'oggetto" + " " + nomeAttrezzo + " " + "è stato preso dalla stanza");
 				}
 				else
 					IO.mostraMessaggio("la borsa è troppo piena, svuotala");
 			}
 			else
-				IO.mostraMessaggio("l'oggetto non trovato");
+				IO.mostraMessaggio("l'oggetto" + " " + nomeAttrezzo + " " + "non è stato trovato nella stanza");
 		}
 		else
 			IO.mostraMessaggio("il comando inesistente");
@@ -166,22 +166,21 @@ public class DiaDia {
 				
 				if(this.partita.getStanzaCorrente().addAttrezzo(AttrezzoDaPosare)) {
 					this.partita.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
-					IO.mostraMessaggio("l'oggetto è stato posato");
+					IO.mostraMessaggio("l'oggetto" + " " + nomeAttrezzo + " " + "è stato posato");
 				}
 				else
 					IO.mostraMessaggio("la stanza è troppo piena, prova altrove");
 			}
 			else
-				IO.mostraMessaggio("l'oggetto non è presente nella tua borsa");
+				IO.mostraMessaggio("l'oggetto" + " " + nomeAttrezzo + " " + "non è presente nella tua borsa");
 		}
 		
 	}
 
 
 	public static void main(String[] argc) {
-		
-		IOConsole IO = new IOConsole();
-		DiaDia gioco = new DiaDia(IO);
+	
+		DiaDia gioco = new DiaDia(new IOConsole());
 		gioco.gioca();
 		
 

@@ -4,7 +4,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Giocatore {
 
-   static final private int CFU_INIZIALI = 5;
+   static final private int CFU_INIZIALI = 20;
     private int cfu;
     private Borsa borsa; // Riferimento alla borsa del giocatore
 

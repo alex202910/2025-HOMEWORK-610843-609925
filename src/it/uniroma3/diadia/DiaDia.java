@@ -1,8 +1,6 @@
 package it.uniroma3.diadia;
 
 
-import java.util.Scanner;
-
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -31,12 +29,11 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine","prendi", "posa"};
+	static final private String[] elencoComandi = {"vai (direzione), ", "aiuto, ", "fine, ", "prendi (oggetto), ", "posa(oggetto)"};
 
 	private Partita partita;
 	private IOConsole IO;
-	// Usiamo l'interfaccia IO invece dell'implementazione diretta
-
+	
     // Modifichiamo il costruttore per accettare l'IO
     public DiaDia(IOConsole IO) {
         this.partita = new Partita();
@@ -64,6 +61,11 @@ public class DiaDia {
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire = new Comando(istruzione);
 
+		if(comandoDaEseguire.getNome() == null) {
+			IO.mostraMessaggio("non hai inserito nulla!"); // senza questo, se premi invio senza inserire nulla, dava un NullPointerException
+			return false;
+		}
+		
 		if (comandoDaEseguire.getNome().equals("fine")) {
 			this.fine(); 
 			return true;
@@ -86,7 +88,7 @@ public class DiaDia {
 		
 		//aggiunto caso quando la partita viene persa
 		else if (this.partita.persa()) {
-			IO.mostraMessaggio("Hai perso!"); // modificalo con is finita, potrebbe esse mejo
+			IO.mostraMessaggio("Hai perso!"); // sembra intercambiale con isFinita, non noto differenze
 			return true;
 		}
 		else
@@ -110,12 +112,12 @@ public class DiaDia {
 	 */
 	private void vai(String direzione) {
 		if(direzione==null)
-			IO.mostraMessaggio("Dove vuoi andare ?");
+			this.IO.mostraMessaggio("Dove vuoi andare ?");
 		
 		Stanza prossimaStanza = null;
 		prossimaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente(direzione);
 		if (prossimaStanza == null)
-			IO.mostraMessaggio("Direzione inesistente");
+			this.IO.mostraMessaggio("Direzione inesistente");
 		else {
 			
 			//facendo una mossa decrementi di 1 cfu (puo non funzionare cfu-- quindi cerca di modificarlo)
@@ -123,14 +125,14 @@ public class DiaDia {
 			int cfu = this.partita.getGiocatore().getCfu(); 
 			this.partita.getGiocatore().setCfu(cfu - 1);
 		}
-		System.out.println(partita); //bel guaio?
+		this.IO.mostraMessaggio(this.partita.toString()); // non potevi passare solo partita
 	}
 
 	/**
 	 * Comando "Fine".
 	 */
 	private void fine() {
-		IO.mostraMessaggio("Grazie di aver giocato!");  // si desidera smettere
+		this.IO.mostraMessaggio("Grazie di aver giocato!");  // si desidera smettere
 	}
 	
 	private void prendi(String nomeAttrezzo) {
@@ -142,16 +144,16 @@ public class DiaDia {
 				Attrezzo AttrezzoDaEliminare = this.partita.getStanzaCorrente().getAttrezzo(nomeAttrezzo);
 				if(this.partita.getGiocatore().getBorsa().addAttrezzo(AttrezzoDaEliminare)) {
 					this.partita.getStanzaCorrente().removeAttrezzo(AttrezzoDaEliminare);
-					IO.mostraMessaggio("l'oggetto" + " " + nomeAttrezzo + " " + "è stato preso dalla stanza");
+					this.IO.mostraMessaggio("l'oggetto" + " " + nomeAttrezzo + " " + "è stato preso dalla stanza");
 				}
 				else
-					IO.mostraMessaggio("la borsa è troppo piena, svuotala");
+					this.IO.mostraMessaggio("la borsa è troppo piena, svuotala");
 			}
 			else
-				IO.mostraMessaggio("l'oggetto" + " " + nomeAttrezzo + " " + "non è stato trovato nella stanza");
+				this.IO.mostraMessaggio("l'oggetto" + " " + nomeAttrezzo + " " + "non è stato trovato nella stanza");
 		}
 		else
-			IO.mostraMessaggio("il comando inesistente");
+			this.IO.mostraMessaggio("non hai inserito il nome dell'oggetto da prendere!");
 		
 		
 	}
@@ -166,13 +168,16 @@ public class DiaDia {
 				
 				if(this.partita.getStanzaCorrente().addAttrezzo(AttrezzoDaPosare)) {
 					this.partita.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
-					IO.mostraMessaggio("l'oggetto" + " " + nomeAttrezzo + " " + "è stato posato");
+					this.IO.mostraMessaggio("l'oggetto" + " " + nomeAttrezzo + " " + "è stato posato");
 				}
 				else
-					IO.mostraMessaggio("la stanza è troppo piena, prova altrove");
+					this.IO.mostraMessaggio("la stanza è troppo piena, prova altrove");
 			}
 			else
-				IO.mostraMessaggio("l'oggetto" + " " + nomeAttrezzo + " " + "non è presente nella tua borsa");
+				this.IO.mostraMessaggio("l'oggetto" + " " + nomeAttrezzo + " " + "non è presente nella tua borsa");
+		}
+		else {
+			this.IO.mostraMessaggio("non hai inserito il nome dell'oggetto da posare!"); 
 		}
 		
 	}

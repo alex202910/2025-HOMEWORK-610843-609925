@@ -14,8 +14,6 @@ import it.uniroma3.diadia.ambienti.Labirinto;
 
 public class Partita {
 
-    // static final private int CFU_INIZIALI = 5;
-
     private Stanza stanzaCorrente;
     private boolean finita;
     private Labirinto labirinto;

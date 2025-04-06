@@ -1,4 +1,3 @@
-package it.uniroma3.diadia.giocatore;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,25 +5,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.giocatore.Borsa;
 
 class BorsaTest {
 	
 	private Borsa borsa;
 	private Attrezzo osso;
 	private Attrezzo lanterna;
-	private Attrezzo pianoforte;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		this.borsa = new Borsa();
 		this.osso = new Attrezzo("osso",1);
 		this.lanterna = new Attrezzo("lanterna",3);
-		this.pianoforte = new Attrezzo("pianoforte", 20);
 	}
 
 	@Test
-	void testAddAttrezzoPesante() {
-		assertFalse(this.borsa.addAttrezzo(pianoforte));
+	void testAddAttrezzoTroppoPesante() {
+		assertFalse(this.borsa.addAttrezzo(new Attrezzo("pianoforte" , Borsa.DEFAULT_PESO_MAX_BORSA + 1)));
 	}
 	
 	@Test
@@ -40,6 +38,10 @@ class BorsaTest {
 	@Test
 	void testRemoveAttrezzoInesistente() {
 		assertNull(this.borsa.removeAttrezzo("osso"));
+	}
+	
+	@Test
+	void testRemoveAttrezzoNull() {
 		assertNull(this.borsa.removeAttrezzo(null));
 	}
 	

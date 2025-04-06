@@ -9,12 +9,10 @@ import it.uniroma3.diadia.ambienti.Stanza;
 class TestPartita {
 
 	private Partita partita;
-	private Stanza stanzaVincente;
 		
 		@BeforeEach
 		void setUp() throws Exception {
 			this.partita = new Partita();
-			this.stanzaVincente = new Stanza("Biblioteca");
 		}
 		
 		@Test

@@ -36,6 +36,12 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 			this.stanza.addAttrezzo(this.spada);
 			assertTrue(this.stanza.removeAttrezzo(spada));
 		}
+		
+		@Test 
+		void testStanzaAdiacente(){
+			this.stanza.impostaStanzaAdiacente("nord", new Stanza("Aula Campus") ) ;
+			assertEquals(stanza.getStanzaAdiacente("nord").getNome() , "Aula Campus");
+		}
 	}
 	
 

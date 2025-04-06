@@ -82,7 +82,8 @@ public class Borsa {
 				
 			for (int i = 0; i < numeroAttrezzi; i++) {
 		        if (this.attrezzi[i].getNome().equals(wanted)) {
-		            attrezzi[i] = rimosso; //
+		            rimosso = attrezzi[i]; //
+		            attrezzi[i] = null;
 		            
 		            // Sposta tutti gli elementi successivi
 		            for (int j = i; j < numeroAttrezzi - 1; j++) {

@@ -20,9 +20,11 @@ public class Comando {
 
     private String nome;
     private String parametro;
+    private IOConsole IO;
 
     public Comando(String istruzione) {
 		Scanner scannerDiParole = new Scanner(istruzione);
+		IO = new IOConsole();
 
 		// prima parola: nome del comando
 		if (scannerDiParole.hasNext())
@@ -31,6 +33,9 @@ public class Comando {
 		// seconda parola: eventuale parametro
 		if (scannerDiParole.hasNext())
 			this.parametro = scannerDiParole.next();
+		
+		if(scannerDiParole.hasNext())
+			IO.mostraMessaggio("hai inserito troppe parole!");
 		
 		scannerDiParole.close();
     }

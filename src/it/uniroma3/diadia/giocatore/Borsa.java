@@ -24,6 +24,9 @@ public class Borsa {
 		
 		public boolean addAttrezzo(Attrezzo attrezzo) {
 			
+			    if (attrezzo == null)  // Add this check
+			        return false;
+			
 					if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
 						return false;
 				if (this.numeroAttrezzi==10)

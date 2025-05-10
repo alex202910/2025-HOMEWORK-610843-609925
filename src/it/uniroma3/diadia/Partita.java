@@ -71,7 +71,7 @@ public class Partita {
     }
 
     public String toString() {
-    	return this.getStanzaCorrente()	+ "\nCFU = " + this.getGiocatore().getCfu();
+    	return this.getStanzaCorrente()	+ "\n" + this.getGiocatore().getDescrizioneBorsa() + "\nCFU = " + this.getGiocatore().getCfu();
     }
     
     

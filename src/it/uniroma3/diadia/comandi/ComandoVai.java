@@ -25,11 +25,12 @@ public class ComandoVai implements Comando{
 		}
 		
 		partita.setStanzaCorrente(prossimaStanza);
+		String vuota = "";
 		if(stanzaCorrente != prossimaStanza) {
 			partita.getGiocatore().setCfu(partita.getGiocatore().getCfu()-1); 
-			io.mostraMessaggio("Sei entrato nella stanza :" + partita.getStanzaCorrente().getNome());
+			vuota = ("Sei entrato nella stanza :" + partita.getStanzaCorrente().getNome() + "\n");
 		}
-		io.mostraMessaggio(partita.toString());
+		io.mostraMessaggio(vuota + partita.toString());
 	}
 		
 		@Override

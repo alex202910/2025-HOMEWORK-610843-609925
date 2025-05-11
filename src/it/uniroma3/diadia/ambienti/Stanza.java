@@ -190,6 +190,7 @@ public class Stanza {
 		return false;
 	}
 
+	
 
 	public String[] getDirezioni() {
 		String[] direzioni = new String[this.numeroStanzeAdiacenti];

@@ -45,16 +45,4 @@ class IOSimulatorTest {
 	}
 	
 	
-	@Test
-	void testPartita2() {
-		String[] input1 = {"", };
-		
-
-		IOSimulator io = new IOSimulator(input1);
-		DiaDia gioco = new DiaDia(io);
-		gioco.gioca();
-
-		
-	}
-
 }

@@ -1,13 +1,24 @@
 
 package it.uniroma3.diadia.giocatore;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Borsa {
 		public final static int DEFAULT_PESO_MAX_BORSA = 10;
-		private Attrezzo[] attrezzi;
-		private int numeroAttrezzi;
+		private Map<String, Attrezzo> nome2attrezzo;
+		private int pesoAttuale;
 		private int pesoMax;
+		
 		public Borsa() {
 		this(DEFAULT_PESO_MAX_BORSA);
 	}
@@ -16,24 +27,32 @@ public class Borsa {
 		
 		public Borsa(int pesoMax) {
 				this.pesoMax = pesoMax;
-				this.attrezzi = new Attrezzo[10]; // speriamo bastino...
-				this.numeroAttrezzi = 0;
+				this.nome2attrezzo = new HashMap<String, Attrezzo>(); // speriamo bastino...
+				this.pesoAttuale = 0;
 		}
 		
 		
 		
 		public boolean addAttrezzo(Attrezzo attrezzo) {
 			
-			    if (attrezzo == null)  // Add this check
-			        return false;
+//			    if (attrezzo == null)  // Add this check
+//			        return false;
+//			
+//					if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
+//						return false;
+//				if (this.numeroAttrezzi==10)
+//					return false;
+//				this.attrezzi[this.numeroAttrezzi] = attrezzo;
+//				this.numeroAttrezzi++;
+//				return true;
 			
-					if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
-						return false;
-				if (this.numeroAttrezzi==10)
-					return false;
-				this.attrezzi[this.numeroAttrezzi] = attrezzo;
-				this.numeroAttrezzi++;
-				return true;
+			if(this.getPeso() + attrezzo.getPeso() > this.pesoMax) {
+				return false;
+			}
+			
+			nome2attrezzo.put(attrezzo.getNome(), attrezzo);
+			this.pesoAttuale = this.pesoAttuale + attrezzo.getPeso();
+			return true;
 		}
 		
 		
@@ -45,26 +64,28 @@ public class Borsa {
 		
 		
 		public Attrezzo getAttrezzo(String nomeAttrezzo) {
-			Attrezzo a = null;
-				for (int i= 0; i<this.numeroAttrezzi; i++)
-					if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
-					a = attrezzi[i];
-				return a;
-}
+//			Attrezzo a = null;
+//				for (int i= 0; i<this.numeroAttrezzi; i++)
+//					if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
+//					a = attrezzi[i];
+//				return a;
+		return nome2attrezzo.get(nomeAttrezzo);
+		}
 
 
 
 		public int getPeso() {
-			int peso = 0;
-				for (int i= 0; i<this.numeroAttrezzi; i++)
-					peso += this.attrezzi[i].getPeso();
-			return peso;
+//			int peso = 0;
+//				for (int i= 0; i<this.numeroAttrezzi; i++)
+//					peso += this.attrezzi[i].getPeso();
+//			return peso;
+			return this.pesoAttuale;
 		}
 
 
 
 	public boolean isEmpty() {
-		return this.numeroAttrezzi == 0;
+		return this.nome2attrezzo.isEmpty();
 	}
 
 
@@ -77,42 +98,91 @@ public class Borsa {
 
 	public Attrezzo removeAttrezzo(String wanted) {
 		
-		Attrezzo rimosso = null;
+//		Attrezzo rimosso = null;
+//		
+//			if( isEmpty() == true) {	
+//				return null;
+//			} 
+//				
+//			for (int i = 0; i < numeroAttrezzi; i++) {
+//		        if (this.attrezzi[i].getNome().equals(wanted)) {
+//		            rimosso = attrezzi[i]; //
+//		            attrezzi[i] = null;
+//		            
+//		            // Sposta tutti gli elementi successivi
+//		            for (int j = i; j < numeroAttrezzi - 1; j++) {
+//		                attrezzi[j] = attrezzi[j + 1];
+//		            }
+//		            
+//		            // Pulisci l'ultima posizione e decrementa il contatore
+//		            attrezzi[numeroAttrezzi - 1] = null;
+//		            numeroAttrezzi--;
+//		            return rimosso;
+//		        }
+//		    }
+//		return rimosso;
 		
-			if( isEmpty() == true) {	
-				return null;
-			} 
-				
-			for (int i = 0; i < numeroAttrezzi; i++) {
-		        if (this.attrezzi[i].getNome().equals(wanted)) {
-		            rimosso = attrezzi[i]; //
-		            attrezzi[i] = null;
-		            
-		            // Sposta tutti gli elementi successivi
-		            for (int j = i; j < numeroAttrezzi - 1; j++) {
-		                attrezzi[j] = attrezzi[j + 1];
-		            }
-		            
-		            // Pulisci l'ultima posizione e decrementa il contatore
-		            attrezzi[numeroAttrezzi - 1] = null;
-		            numeroAttrezzi--;
-		            return rimosso;
-		        }
-		    }
-		return rimosso;
+		if(nome2attrezzo.containsKey(wanted)) {
+			this.pesoAttuale = this.pesoAttuale - this.nome2attrezzo.get(wanted).getPeso();
+		}
+		return nome2attrezzo.remove(wanted);
 	}
 
 
 
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		if (!this.isEmpty()) {
+		if(!this.isEmpty()) {
 			s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
-				for (int i= 0; i<this.numeroAttrezzi; i++)
-					s.append(attrezzi[i].toString()+" ");
-	}else
+//			for (Attrezzo attrezzo : this.nome2attrezzo.values()) {
+//				s.append(attrezzo.toString()+" ");
+//			}
+			s.append(this.nome2attrezzo.values().toString());
+		}
+		else
 			s.append("Borsa vuota");
 		return s.toString();
+	
+	}
+	
+	
+	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
+		List<Attrezzo> listaAttrezzi = new LinkedList<Attrezzo>(this.nome2attrezzo.values());
+		Collections.sort(listaAttrezzi, new ComparatorePerPeso());
+		return listaAttrezzi;
+	}
+	
+	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
+		
+		SortedSet<Attrezzo> SortedAttrezzi = new TreeSet<>(new ComparatorePerNome());
+		SortedAttrezzi.addAll(this.nome2attrezzo.values());
+		return SortedAttrezzi;
+	}
+	
+	public Map<Integer, Set<Attrezzo>> getContenutoRaggruppatoPerPeso(){
+		
+		Map<Integer, Set<Attrezzo>> mappa = new HashMap<>();
+		Set<Attrezzo> tmp;
+		
+		for(Attrezzo a : this.nome2attrezzo.values()) {
+			if(mappa.containsKey(a.getPeso())) {
+				tmp = mappa.get(a.getPeso());
+				tmp.add(a);
+			}else {
+				tmp = new HashSet<Attrezzo>();
+				tmp.add(a);
+				mappa.put(a.getPeso(), tmp);
+			}
+		}
+		return mappa;
+	}
+	
+public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
+		
+		SortedSet<Attrezzo> sortedSet = new TreeSet<>(new ComparatorePerPeso());
+		sortedSet.addAll(this.nome2attrezzo.values());
+		
+		return sortedSet;
 	}
 	
 }

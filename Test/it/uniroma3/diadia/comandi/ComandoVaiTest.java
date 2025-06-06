@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.ComandoVai;
@@ -25,7 +26,7 @@ class ComandoVaiTest {
 		
 		this.comando = new ComandoVai();
 		this.comando.setIO(new IOConsole());
-		this.partita = new Partita();
+		this.partita = new Partita(new LabirintoBuilder().build().getLabirinto());
 		this.direzione = "nord";
 		this.stanzaIniziale = new Stanza("N10");
 		this.stanzaSecondaria = new Stanza("N11");

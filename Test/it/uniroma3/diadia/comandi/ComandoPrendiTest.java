@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.ComandoPosa;
@@ -23,7 +24,7 @@ class ComandoPrendiTest {
 	public void setUp() throws Exception {
 		this.comandoPrendi = new ComandoPrendi();
 		this.comandoPrendi.setIO(new IOConsole());
-		this.partita = new Partita();
+		this.partita = new Partita(new LabirintoBuilder().build().getLabirinto());
 		Attrezzo attrezzoNuovo = new Attrezzo("arco", 1);
 		this.partita.getStanzaCorrente().addAttrezzo(attrezzoNuovo);
 	}

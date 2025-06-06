@@ -1,44 +1,36 @@
 package it.uniroma3.diadia;
 
-import java.util.Scanner;
-
-import it.uniroma3.diadia.comandi.Comando;
-import it.uniroma3.diadia.comandi.FabbricaDiComandi;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IOSimulator implements IO{
 
 
-	private String[] input;
 	private int inputIndice;
-	private String[] output; 
-	private int outputIndice;
+	private List<String > input;
+	private List<String > output;
 	
-	
-	public IOSimulator(String[] input) {
+	public IOSimulator(List<String > input) {
 		this.input = input;
 		this.inputIndice = 0;
-		this.output = new String[input.length + 12];
-		this.outputIndice = 0;
+		this.output = new ArrayList<String>();
 	}
 	
 	@Override
 	public void mostraMessaggio(String msg) {
-		if(outputIndice> output.length )
-			return;
-		output[outputIndice++] = msg;
+		output.add(msg);
 	}
 	
 	
 	@Override
 	public String leggiRiga() {
-		if(inputIndice < input.length)
-			return input[inputIndice++];
+		if(inputIndice < input.size())
+			return input.get(inputIndice++);
 		return "";
 		
 	}
 	
-	public String[] getOutput() {
+	public List<String> getOutput() {
 		return output;
 	}
 	

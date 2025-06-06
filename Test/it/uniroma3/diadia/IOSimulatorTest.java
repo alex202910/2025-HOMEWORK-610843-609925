@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
+
 class IOSimulatorTest {
 
 	@Test
@@ -13,7 +15,7 @@ class IOSimulatorTest {
 		
 
 		IOSimulator io = new IOSimulator(input1);
-		DiaDia gioco = new DiaDia(io);
+		DiaDia gioco = new DiaDia(io, Labirinto labirinto);
 		gioco.gioca();
 		//testo stanza buia e bloccata
 		
@@ -43,7 +45,20 @@ class IOSimulatorTest {
 		}
 		
 	}
+	
+	
+	@Test
+	void testPartita2() {
+		String[] input1 = {"vai sud", "prendi lanterna" };
 		
 
+		IOSimulator io = new IOSimulator(input1);
+		DiaDia gioco = new DiaDia(io);
+		gioco.gioca();
+		
+		
+		
+		
+	}
 
 }

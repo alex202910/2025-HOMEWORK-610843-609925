@@ -7,42 +7,40 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
-import it.uniroma3.diadia.comandi.Comando;
-import it.uniroma3.diadia.comandi.ComandoPosa;
-import it.uniroma3.diadia.comandi.ComandoPrendi;
-import it.uniroma3.diadia.giocatore.Borsa;
+
 
 class ComandoPrendiTest {
 
 	private Partita partita;
 	private ComandoPrendi comandoPrendi;
+	private IOConsole console;
 
 
 	@BeforeEach
 	public void setUp() throws Exception {
 		this.comandoPrendi = new ComandoPrendi();
-		this.comandoPrendi.setIO(new IOConsole());
+		this.console= new IOConsole(null);
 		this.partita = new Partita(new LabirintoBuilder().build().getLabirinto());
 		Attrezzo attrezzoNuovo = new Attrezzo("arco", 1);
-		this.partita.getStanzaCorrente().addAttrezzo(attrezzoNuovo);
+		partita.getStanzaCorrente().addAttrezzo(attrezzoNuovo);
 	}
 	
 	@Test
 	public void testEseguiAttrezzoPresente() {
 		this.comandoPrendi.setParametro("arco");
-		this.comandoPrendi.esegui(partita);
+		this.comandoPrendi.esegui(partita, console);
 		
-		assertTrue(partita.getStanzaCorrente().hasAttrezzo("arco"));
-		assertFalse(partita.getGiocatore().getBorsa().hasAttrezzo("arco"));
+		assertFalse(partita.getStanzaCorrente().hasAttrezzo("arco"));
+		assertTrue(partita.getGiocatore().getBorsa().hasAttrezzo("arco"));
 	}
 	
 	@Test
 	public void testEseguiAttrezzoNonPresente() {
 		String nonPresente = "attrezzoNonPresente";
 		this.comandoPrendi.setParametro(nonPresente);
-		this.comandoPrendi.esegui(partita);
+		this.comandoPrendi.esegui(partita, console);
 		assertFalse(partita.getGiocatore().getBorsa().hasAttrezzo(nonPresente));
 		assertFalse(partita.getGiocatore().getBorsa().hasAttrezzo("arco"));
 		assertTrue(partita.getStanzaCorrente().hasAttrezzo("arco"));

@@ -20,36 +20,36 @@ class StanzaBloccataTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		this.stanzaBloccata = new StanzaBloccata("N11", "chiave", "nord");
+		this.stanzaBloccata = new StanzaBloccata("N11", "chiave", Direzione.NORD);
 		this.stanzaIniziale = new Stanza("N9");
 		this.stanzaLibera = new Stanza("N10");
 		this.chiave = new Attrezzo("chiave", 1);
 		this.lanterna = new Attrezzo("lanterna", 3);
-		stanzaIniziale.impostaStanzaAdiacente("nord", stanzaBloccata);
-		stanzaIniziale.impostaStanzaAdiacente("sud", stanzaLibera);
+		stanzaIniziale.impostaStanzaAdiacente(Direzione.NORD, stanzaBloccata);
+		stanzaIniziale.impostaStanzaAdiacente(Direzione.SUD, stanzaLibera);
 	}
 	
 	@Test
 	public void testGetStanzaAdiacenteBloccata() {
 		
-		assertEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente("nord"));
+		assertEquals(this.stanzaBloccata, this.stanzaBloccata.getStanzaAdiacente(Direzione.NORD));
 	}
 	
 	@Test
 	public void testGetStanzaAdicenteSbloccata() {
 		this.stanzaIniziale.addAttrezzo(lanterna);
-		assertEquals(this.stanzaIniziale.getStanzaAdiacente("nord"), this.stanzaBloccata);
+		assertEquals(this.stanzaIniziale.getStanzaAdiacente(Direzione.NORD), this.stanzaBloccata);
 	}
 	
 	@Test
 	public void testGetStanzaAdicenteBloccata1() {
 		
-		assertNotEquals(this.stanzaIniziale.getStanzaAdiacente("nord").getNome(), this.stanzaBloccata);
+		assertNotEquals(this.stanzaIniziale.getStanzaAdiacente(Direzione.NORD).getNome(), this.stanzaBloccata);
 	}
 	
 	@Test
 	public void testGetStanzaAdicenteLibera() {
-		assertEquals(this.stanzaIniziale.getStanzaAdiacente("sud"), this.stanzaLibera);
+		assertEquals(this.stanzaIniziale.getStanzaAdiacente(Direzione.SUD), this.stanzaLibera);
 	}
 	
 }

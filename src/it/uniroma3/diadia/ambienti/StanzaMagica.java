@@ -1,14 +1,17 @@
 package it.uniroma3.diadia.ambienti;
 
+import java.util.Properties;
+
+import it.uniroma3.diadia.CaricatoreProprieta;
+import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-	class StanzaMagica extends Stanza {
-		final static private int SOGLIA_MAGICA_DEFAULT = 3;
+	public class StanzaMagica extends Stanza {
 		private int contatoreAttrezziPosati;
 		private int sogliaMagica;
 		
 		public StanzaMagica(String nome) {
-			this(nome, SOGLIA_MAGICA_DEFAULT);
+			this(nome, CaricatoreProprieta.getSoglia());
 		}
 		
 		

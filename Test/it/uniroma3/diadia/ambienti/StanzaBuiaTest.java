@@ -35,14 +35,14 @@ class StanzaBuiaTest {
 	void testDescrizioneConLanterna() {
 		
 		this.stanza.addAttrezzo(lanterna);
-		assertNotEquals(this.stanza.getDescrizione(), MESSAGGIO);
+		assertEquals(this.stanza.getDescrizione(), MESSAGGIO);
 		
 	}
 	
 	@Test
 	void testGetAttrezzoInesistente() {
-		this.stanza.addAttrezzo(null);
-		assertNull(this.stanza.getAttrezzo("spada"));
+		this.stanza.addAttrezzo(spada);
+		assertNull(this.stanza.getAttrezzo(""));
 	}
 	
 

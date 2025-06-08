@@ -1,15 +1,16 @@
 package it.uniroma3.diadia.giocatore;
 
+import it.uniroma3.diadia.CaricatoreProprieta;
+import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Giocatore {
 
-   static final private int CFU_INIZIALI = 20;
     private int cfu;
     private Borsa borsa; // Riferimento alla borsa del giocatore
 
     public Giocatore() {
-         this.cfu = CFU_INIZIALI;
+         this.cfu = CaricatoreProprieta.getCFU();
         this.borsa = new Borsa(); // Inizializza la borsa
     }
 
@@ -63,4 +64,10 @@ public class Giocatore {
     public String getDescrizioneBorsa() {
         return this.borsa.toString();
     }
+    
+    
+    public String toString() {
+    	return this.cfu +"\n"+ this.borsa.toString();
+    }
+    
 }

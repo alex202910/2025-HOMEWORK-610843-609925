@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
@@ -19,8 +20,9 @@ class ComandoPosaTest {
 
 	
 	private Partita partita;
-
+	private ComandoPosa posa;
 	private Comando comandoPosa;
+	private IOConsole console;
 	private Attrezzo attrezzo;
 	private Borsa borsa;
 	
@@ -28,7 +30,7 @@ class ComandoPosaTest {
 	void SetUp() throws Exception{
 		
 		this.comandoPosa = new ComandoPosa();
-		this.comandoPosa.setIO(new IOConsole());
+		this.console= new IOConsole(null);
 		this.partita = new Partita(new LabirintoBuilder().build().getLabirinto());
 		this.borsa = partita.getGiocatore().getBorsa();
 		this.attrezzo = new Attrezzo("arco", 5);
@@ -39,7 +41,7 @@ class ComandoPosaTest {
 	void testPosaOggetto() {
 		
 		this.comandoPosa.setParametro("arco");
-		this.comandoPosa.esegui(partita);
+		this.comandoPosa.esegui(partita, console);
 		assertTrue(partita.getStanzaCorrente().hasAttrezzo("arco"));
 		assertFalse(partita.getGiocatore().hasAttrezzo("arco"));
 	}
@@ -49,7 +51,7 @@ class ComandoPosaTest {
 	void testPosaOggettoNonEsistente() {
 		
 		this.comandoPosa.setParametro("boh!");
-		this.comandoPosa.esegui(partita);
+		this.comandoPosa.esegui(partita, console);
 		assertFalse(partita.getStanzaCorrente().hasAttrezzo("boh!"));
 		assertFalse(partita.getStanzaCorrente().hasAttrezzo("boh!"));
 		assertTrue(partita.getGiocatore().hasAttrezzo("arco"));

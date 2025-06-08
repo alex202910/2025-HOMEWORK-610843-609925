@@ -35,17 +35,6 @@ public class Borsa {
 		
 		public boolean addAttrezzo(Attrezzo attrezzo) {
 			
-//			    if (attrezzo == null)  // Add this check
-//			        return false;
-//			
-//					if (this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
-//						return false;
-//				if (this.numeroAttrezzi==10)
-//					return false;
-//				this.attrezzi[this.numeroAttrezzi] = attrezzo;
-//				this.numeroAttrezzi++;
-//				return true;
-			
 			if(this.getPeso() + attrezzo.getPeso() > this.pesoMax) {
 				return false;
 			}
@@ -64,21 +53,12 @@ public class Borsa {
 		
 		
 		public Attrezzo getAttrezzo(String nomeAttrezzo) {
-//			Attrezzo a = null;
-//				for (int i= 0; i<this.numeroAttrezzi; i++)
-//					if (this.attrezzi[i].getNome().equals(nomeAttrezzo))
-//					a = attrezzi[i];
-//				return a;
 		return nome2attrezzo.get(nomeAttrezzo);
 		}
 
 
 
 		public int getPeso() {
-//			int peso = 0;
-//				for (int i= 0; i<this.numeroAttrezzi; i++)
-//					peso += this.attrezzi[i].getPeso();
-//			return peso;
 			return this.pesoAttuale;
 		}
 
@@ -97,31 +77,6 @@ public class Borsa {
 
 
 	public Attrezzo removeAttrezzo(String wanted) {
-		
-//		Attrezzo rimosso = null;
-//		
-//			if( isEmpty() == true) {	
-//				return null;
-//			} 
-//				
-//			for (int i = 0; i < numeroAttrezzi; i++) {
-//		        if (this.attrezzi[i].getNome().equals(wanted)) {
-//		            rimosso = attrezzi[i]; //
-//		            attrezzi[i] = null;
-//		            
-//		            // Sposta tutti gli elementi successivi
-//		            for (int j = i; j < numeroAttrezzi - 1; j++) {
-//		                attrezzi[j] = attrezzi[j + 1];
-//		            }
-//		            
-//		            // Pulisci l'ultima posizione e decrementa il contatore
-//		            attrezzi[numeroAttrezzi - 1] = null;
-//		            numeroAttrezzi--;
-//		            return rimosso;
-//		        }
-//		    }
-//		return rimosso;
-		
 		if(nome2attrezzo.containsKey(wanted)) {
 			this.pesoAttuale = this.pesoAttuale - this.nome2attrezzo.get(wanted).getPeso();
 		}

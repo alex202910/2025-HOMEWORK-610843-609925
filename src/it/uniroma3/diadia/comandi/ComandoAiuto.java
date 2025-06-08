@@ -6,7 +6,7 @@ import it.uniroma3.diadia.Partita;
 
 public class ComandoAiuto extends AbstractComando{
 
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa", "guarda"};
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa", "guarda", "interagisci", "saluta"};
 	private IO io;
 	
 	public ComandoAiuto() {
@@ -17,8 +17,8 @@ public class ComandoAiuto extends AbstractComando{
 	public void esegui(Partita partita, IO io) {
 		
 		for(int i=0; i< ComandoAiuto.elencoComandi.length; i++) 
-			this.io.mostraMessaggio(ComandoAiuto.elencoComandi[i]+" ");
-		this.io.mostraMessaggio("");
+			io.mostraMessaggio(ComandoAiuto.elencoComandi[i]+" ");
+		io.mostraMessaggio("");
 	}
 
 

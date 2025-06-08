@@ -6,10 +6,10 @@ public class StanzaBloccata extends Stanza{
 
 	final static private String NOME_ATTREZZO_DEFAULT = "chiave";
 	private String attrezzo;
-	private String direzioneBloccata;
+	private Direzione direzioneBloccata;
 	
 
-	public StanzaBloccata(String nome, String attrezzo, String direzione){
+	public StanzaBloccata(String nome, String attrezzo, Direzione direzione){
 		super(nome);
 		this.attrezzo = attrezzo;
 		this.direzioneBloccata = direzione;
@@ -17,16 +17,18 @@ public class StanzaBloccata extends Stanza{
 	
 	@Override
 	public String getDescrizione() {
-		return "questa stanza può essere aperta solo se si ha un piede di porco";
+		return "\nla porta a "+this.direzioneBloccata+" è chiusa e per aprirla serve "+this.attrezzo;
 	}
 	
 	@Override
-	public Stanza getStanzaAdiacente(String direzione){
+	public Stanza getStanzaAdiacente(Direzione direzione){
 		if( !hasAttrezzo(NOME_ATTREZZO_DEFAULT) && direzione.equals(direzioneBloccata) ) {
 			return this;
 		}
 			
 		return super.getStanzaAdiacente(direzione);
 	}
+	
+	
 	
 }

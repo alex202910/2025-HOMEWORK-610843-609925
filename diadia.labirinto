@@ -1,0 +1,9 @@
+Stanze: biblioteca, N11
+StanzeBuie: N10 lanterna
+StanzeMagiche: Laboratorio-Campus 3
+StanzeBloccate: atrio nord chiave
+Inizio: atrio
+Vincente: biblioteca  
+Attrezzi: osso 1 atrio, lancia 4 atrio, scudo 7 atrio, lanterna 3 N10, chiave 1 N11
+Personaggi: strega N10 Sono-Rennala-la-strega-lunare, mago Laboratorio-Campus Sono-il-mago-Lebron-James pollo 4, cane N11 Sono-Cerbero-il-cane-parlante escrementi 1
+Uscite: atrio nord biblioteca, atrio est N11, atrio sud N10, atrio ovest Laboratorio-Campus
